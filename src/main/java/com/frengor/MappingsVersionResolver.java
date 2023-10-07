@@ -15,15 +15,23 @@ import org.eclipse.aether.repository.RemoteRepository;
 import org.eclipse.aether.resolution.ArtifactRequest;
 import org.eclipse.aether.resolution.ArtifactResolutionException;
 import org.eclipse.aether.resolution.ArtifactResult;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.Opcodes;
 
 import java.io.File;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * Resolves the version of the mappings used by the provided Spigot server.
  */
 @Mojo(name = "resolve-mappings-version", defaultPhase = LifecyclePhase.INITIALIZE)
 public class MappingsVersionResolver extends AbstractMojo {
+
+    private static final Pattern CRAFT_MAGIC_NUMBERS = Pattern.compile("org/bukkit/craftbukkit/v\\d+_\\d+_R\\d+/util/CraftMagicNumbers\\.class");
 
     /**
      * The current Maven project.
@@ -73,7 +81,45 @@ public class MappingsVersionResolver extends AbstractMojo {
             throw new MojoExecutionException("File doesn't exists!");
         }
 
-        project.getProperties().setProperty(outputProperty, serverJar.getAbsolutePath());
+        try (ZipFile file = new ZipFile(serverJar)) {
+            ZipEntry craftBukkitDir = file.getEntry("org/bukkit/craftbukkit");
+
+            if (!craftBukkitDir.isDirectory()) {
+                throw new MojoExecutionException("Couldn't find the org.bukkit.craftbukkit package inside " + server);
+            }
+
+            List<ZipEntry> entries = file.stream()
+                    .filter(entry -> !entry.isDirectory() && CRAFT_MAGIC_NUMBERS.matcher(entry.getName()).matches())
+                    .collect(Collectors.toList());
+
+            if (entries.isEmpty()) {
+                throw new MojoExecutionException("Couldn't find the CraftMagicNumbers class inside " + server);
+            }
+            if (entries.size() > 1) {
+                getLog().debug("Found too many CraftMagicNumbers classes inside " + server);
+                entries.forEach(entry -> getLog().debug(entry.getName()));
+                throw new MojoExecutionException("Found multiple CraftMagicNumbers classes inside " + server);
+            }
+
+            ZipEntry craftMagicNumbers = entries.get(0);
+
+            CraftMagicNumbersVisitor visitor = new CraftMagicNumbersVisitor(Opcodes.ASM9);
+            new ClassReader(file.getInputStream(craftMagicNumbers)).accept(visitor, ClassReader.SKIP_DEBUG);
+
+            String resolvedVersion = visitor.getVersion();
+
+            if (resolvedVersion == null) {
+                throw new MojoExecutionException("Couldn't find or get the mappings version from method getMappingsVersion()");
+            }
+
+            project.getProperties().setProperty(outputProperty, resolvedVersion);
+        } catch (MojoExecutionException e) {
+            getLog().error(e);
+            throw e; // Just re-throw
+        } catch (Exception e) {
+            getLog().error(e);
+            throw new MojoExecutionException("Couldn't resolve the mappings version: " + e.getMessage(), e);
+        }
     }
 
     private File resolveArtifact(String coordinates) throws MojoExecutionException, ArtifactResolutionException {
