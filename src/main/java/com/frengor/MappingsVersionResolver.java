@@ -40,7 +40,8 @@ public class MappingsVersionResolver extends AbstractMojo {
     private MavenProject project;
 
     /**
-     * The path to the server's Jar file or its artifact as a string in the form of groupId:artifactId:version[:type[:classifier]].
+     * The path to the server's Jar file or its artifact as a string in the form of groupId:artifactId:version[:type[:classifier]]
+     * (the default type is "jar").
      */
     @Parameter(property = "server", required = true)
     private String server;
@@ -130,7 +131,7 @@ public class MappingsVersionResolver extends AbstractMojo {
         String groupId = array[0];
         String artifactId = array[1];
         String version = array[2];
-        String type = null;
+        String type = "jar";
         String classifier = null;
 
         if (array.length > 3) {
