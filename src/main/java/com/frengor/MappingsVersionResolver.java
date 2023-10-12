@@ -42,7 +42,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 /**
- * Resolves the version of the mappings used by the provided Spigot server.
+ * Resolves the version of the mappings used by the provided Spigot server (or fork).
  */
 @Mojo(name = "resolve-mappings-version", defaultPhase = LifecyclePhase.INITIALIZE)
 public class MappingsVersionResolver extends AbstractMojo {
@@ -59,13 +59,13 @@ public class MappingsVersionResolver extends AbstractMojo {
      * The path to the server's Jar file or its artifact as a string in the form of groupId:artifactId:version[:type[:classifier]]
      * (the default type is "jar").
      */
-    @Parameter(property = "server", required = true)
+    @Parameter(property = "mappingsVersionResolver.server", required = true)
     private String server;
 
     /**
      * The property in which to put the resolved mappings version.
      */
-    @Parameter(defaultValue = "resolvedMappingsVersion", property = "outputProperty")
+    @Parameter(property = "mappingsVersionResolver.outputProperty", defaultValue = "resolvedMappingsVersion")
     private String outputProperty;
 
     @Component
