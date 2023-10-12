@@ -1,0 +1,86 @@
+ ------
+ Introduction
+ ------
+ fren_gor
+ ------
+ 2023-10-10
+ ------
+
+
+Usage
+
+* Add fren_gor repo
+
+  Mappings Version Resolver is published in the <<<https://nexus.frengor.com/repository/public/>>> repository.
+
+  Add the following to your <<<pom.xml>>> to add the repository:
+
++----------+
+<project>
+  ...
+  <pluginRepositories>
+    <pluginRepository>
+      <id>fren_gor</id>
+      <url>https://nexus.frengor.com/repository/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
+  ...
+</project>
++----------+
+
+* Resolve the mappings version
+
+  The mappings version is resolved using the server artifact (or path to the server's file) provided in the <<<server>>>
+  parameter.
+
+  The resolved version is put into the property specified into the <<<outputProperty>>> parameter. If not specified,
+  the default value is <<<resolvedMappingsVersion>>>.
+
++----------+
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}</artifactId>
+        <version>${project.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>resolve-mappings-version</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <!-- Spigot artifact (or fork) -->
+          <server>org.spigotmc:spigot:SPIGOT VERSION</server>
+
+          <!-- Optional, the default value is resolvedMappingsVersion -->
+          <outputProperty>resolvedMappingsVersion</outputProperty>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  ...
+</project>
++----------+
+
+* From the command line
+
+  The following command can be used to print the mappings version on the command line:
+
++----------+
+mvn com.frengor:mappings-version-resolver-maven-plugin:resolve-mappings-version -DmappingsVersionResolver.server=org.spigotmc:spigot:SPIGOT-VERSION \
+        help:evaluate -Dexpression=resolvedMappingsVersion -q -DforceStdout
++----------+
+
+* Checking the mappings version
+
+  The string returned by the Mappings Version Resolver plugin can be compared with the value returned by <<<CraftMagicNumbers.getMappingsVersion()>>>:
+
++----------+
+if (!CraftMagicNumbers.getMappingsVersion().equals(mappingsVersionString)) {
+  throw new RuntimeException("Invalid mappings version!");
+}
++----------+

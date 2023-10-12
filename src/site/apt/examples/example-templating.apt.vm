@@ -1,0 +1,87 @@
+ ------
+ Introduction
+ ------
+ fren_gor
+ ------
+ 2023-10-10
+ ------
+
+
+Usage with templating-maven-plugin
+
+  ${project.name} can be used with the {{{https://www.mojohaus.org/templating-maven-plugin/}templating-maven-plugin}} to
+  automatically have the correct mappings version inside the compiled plugin without having to manually update it for
+  every new version (or mappings change).
+
+  Firstly, add the following to your <<<pom.xml>>>:
+
++----------+
+<project>
+  ...
+  <pluginRepositories>
+    <pluginRepository>
+      <id>fren_gor</id>
+      <url>https://nexus.frengor.com/repository/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}</artifactId>
+        <version>${project.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>resolve-mappings-version</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <!-- Spigot artifact (or fork) -->
+          <server>org.spigotmc:spigot:SPIGOT-VERSION</server>
+
+          <!-- Optional, the default value is resolvedMappingsVersion -->
+          <outputProperty>resolvedMappingsVersion</outputProperty>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>templating-maven-plugin</artifactId>
+        <version>1.0.0</version>
+        <executions>
+          <execution>
+            <goals>
+                <goal>filter-sources</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  ...
+</project>
++----------+
+
+  Next, create the file <<<src/main/java-templates/your/project/package/MappingVersion.java>>>:
+
++----------+
+package your.project.package;
+
+public class MappingVersion {
+    public static final String RESOLVED_MAPPINGS_VERSION = "${resolvedMappingsVersion}";
+}
++----------+
+
+  The <<<MappingVersion.RESOLVED_MAPPINGS_VERSION>>> constant will contain the resolved version of the mappings.
+
+* Checking the mappings version
+
+  You can now compare <<<RESOLVED_MAPPINGS_VERSION>>> with <<<CraftMagicNumbers.getMappingsVersion()>>>:
+
++----------+
+if (!CraftMagicNumbers.getMappingsVersion().equals(MappingVersion.RESOLVED_MAPPINGS_VERSION)) {
+  throw new RuntimeException("Invalid mappings version!");
+}
++----------+

@@ -8,8 +8,8 @@
     <packaging>maven-plugin</packaging>
 
     <name>Mappings Version Resolver Maven Plugin</name>
-    <description>A maven plugin to resolve the mappings version used by the provided Spigot server version.</description>
-    <url>https://github.com/frengor/MappingsVersionResolver</url>
+    <description>A maven plugin to resolve the mappings version used by the provided Spigot server (or fork).</description>
+    <url>https://frengor.com/maven-plugins/mappings-version-resolver/</url>
     <inceptionYear>2023</inceptionYear>
 
     <developers>
@@ -25,6 +25,17 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/frengor/MappingsVersionResolver/issues</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:https://github.com/frengor/MappingsVersionResolver.git</connection>
+        <developerConnection>scm:git:https://github.com/frengor/MappingsVersionResolver.git</developerConnection>
+        <url>https://github.com/frengor/MappingsVersionResolver</url>
+    </scm>
 
     <properties>
         <projectEncoding>UTF-8</projectEncoding>
@@ -83,12 +94,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-utils</artifactId>
-            <version>3.5.1</version>
-        </dependency>
-
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
@@ -114,6 +119,40 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.12.1</version>
+                <configuration>
+                    <skipDeploy>true</skipDeploy>
+                    <validate>true</validate>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <!-- Fluido Maven Skin -->
+                        <groupId>org.apache.maven.skins</groupId>
+                        <artifactId>maven-fluido-skin</artifactId>
+                        <version>1.11.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.4.5</version>
+            </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-report-plugin</artifactId>
+                <version>3.9.0</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

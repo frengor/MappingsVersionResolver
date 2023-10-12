@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.11.1</version>
+    </skin>
+
+    <custom>
+        <fluidoSkin>
+            <googleSearch>
+                <sitesearch/>
+            </googleSearch>
+            <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+        </fluidoSkin>
+    </custom>
+
+    <version position="right"/>
+    <publishDate position="right"/>
+
+    <!--<bannerLeft>
+        <name>image-alt</name>
+        <src>url.png</src>
+        <href>destUrl</href>
+    </bannerLeft>
+    <bannerRight>
+        <src>url.png</src>
+    </bannerRight>-->
+
+    <body>
+        <breadcrumbs>
+            <item name="Maven Plugins" href="https://frengor.com/maven-plugins/"/>
+            <item name="Mappings Version Resolver" href="index.html"/>
+        </breadcrumbs>
+        <menu name="Overview">
+            <item name="Introduction" href="index.html"/>
+            <item name="Goals" href="plugin-info.html"/>
+            <item name="Usage" href="usage.html"/>
+            <!-- <item name="FAQ" href="faq.html"/> -->
+        </menu>
+
+        <menu name="Examples">
+            <item name="Example with templating" href="examples/example-templating.html"/>
+        </menu>
+
+        <menu ref="modules" />
+        <menu ref="reports"/>
+
+        <footer><![CDATA[&copy; ${project.inceptionYear} fren_gor]]></footer>
+    </body>
+</project>

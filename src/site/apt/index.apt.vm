@@ -1,0 +1,33 @@
+ ------
+ Introduction
+ ------
+ fren_gor
+ ------
+ 2023-10-10
+ ------
+
+
+${project.name}
+
+  ${project.description}
+
+* Goals Overview
+
+  * {{{./resolve-mappings-version-mojo.html}mappings-version-resolver:resolve-mappings-version}} Resolves the version of the mappings used by the provided Spigot server (or fork).
+
+* Usage
+
+  General instructions on how to use the plugin can be found on the {{{./usage.html}usage page}}. Some more
+  specific use cases are described in the examples given below.
+
+  If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in the
+  {{{./issue-management.html}issue tracker}}. When creating a new issue, please provide a comprehensive description of your
+  concern. Especially for fixing bugs it is crucial that the developers can reproduce your problem.
+  Of course, contributions are welcome, too. Contributors can check out the project from the {{{./scm.html}source repository}}.
+
+* Examples
+
+  To provide you with better understanding of some usages of the Mappings Version Resolver plugin,
+  you can take a look into the following examples:
+
+  * {{{./examples/example-templating.html}Example with templating}}
