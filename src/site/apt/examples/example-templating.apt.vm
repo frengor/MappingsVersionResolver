@@ -11,7 +11,7 @@ Usage with templating-maven-plugin
 
   ${project.name} can be used with the {{{https://www.mojohaus.org/templating-maven-plugin/}templating-maven-plugin}} to
   automatically have the correct mappings version inside the compiled plugin without having to manually update it for
-  every new version (or mappings change).
+  every new minecraft version (or mappings change).
 
   Firstly, add the following to your <<<pom.xml>>>:
 
@@ -82,6 +82,6 @@ public class MappingVersion {
 
 +----------+
 if (!CraftMagicNumbers.getMappingsVersion().equals(MappingVersion.RESOLVED_MAPPINGS_VERSION)) {
-  throw new RuntimeException("Invalid mappings version!");
+  throw new RuntimeException("Wrong mappings version found!");
 }
 +----------+

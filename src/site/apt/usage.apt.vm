@@ -77,10 +77,10 @@ mvn com.frengor:mappings-version-resolver-maven-plugin:resolve-mappings-version 
 
 * Checking the mappings version
 
-  The string returned by the Mappings Version Resolver plugin can be compared with the value returned by <<<CraftMagicNumbers.getMappingsVersion()>>>:
+  The string obtained using the Mappings Version Resolver plugin can be compared with the value returned by <<<CraftMagicNumbers.getMappingsVersion()>>>:
 
 +----------+
 if (!CraftMagicNumbers.getMappingsVersion().equals(mappingsVersionString)) {
-  throw new RuntimeException("Invalid mappings version!");
+  throw new RuntimeException("Wrong mappings version found!");
 }
 +----------+
