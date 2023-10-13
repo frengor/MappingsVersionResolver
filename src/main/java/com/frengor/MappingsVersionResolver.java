@@ -47,6 +47,11 @@ import java.util.zip.ZipFile;
 @Mojo(name = "resolve-mappings-version", defaultPhase = LifecyclePhase.INITIALIZE)
 public class MappingsVersionResolver extends AbstractMojo {
 
+    /**
+     * The API value for ASM library. Remember to update when updating the library version.
+     */
+    private static final int ASM_API = Opcodes.ASM9;
+
     private static final Pattern CRAFT_MAGIC_NUMBERS = Pattern.compile("org/bukkit/craftbukkit/v\\d+_\\d+_R\\d+/util/CraftMagicNumbers\\.class");
 
     /**
@@ -120,7 +125,7 @@ public class MappingsVersionResolver extends AbstractMojo {
 
             ZipEntry craftMagicNumbers = entries.get(0);
 
-            CraftMagicNumbersVisitor visitor = new CraftMagicNumbersVisitor(Opcodes.ASM9);
+            CraftMagicNumbersVisitor visitor = new CraftMagicNumbersVisitor(ASM_API);
             new ClassReader(file.getInputStream(craftMagicNumbers)).accept(visitor, ClassReader.SKIP_DEBUG);
 
             String resolvedVersion = visitor.getVersion();
