@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.frengor;
+package com.frengor.mappingsVersionResolver;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;

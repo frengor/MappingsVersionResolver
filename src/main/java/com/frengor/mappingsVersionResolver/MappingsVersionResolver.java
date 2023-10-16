@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.frengor;
+package com.frengor.mappingsVersionResolver;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
