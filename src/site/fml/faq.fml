@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns="http://maven.apache.org/FML/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/FML/1.0 http://maven.apache.org/xsd/fml-1.0.xsd" id="FAQ" title="Frequently Asked Questions">
+  <part id="General">
+    <faq id="When should I use the Mappings Version Resolver plugin">
+      <question>When should I use the Mappings Version Resolver plugin?</question>
+      <answer>
+        <p>
+          It is suggested to use the Mappings Version Resolver plugin when you want to automatically check the version
+          of the mappings without having to keep updated the version string by hand.
+        </p>
+        <p>
+          This is almost always the case, for example, when using
+          <a href="https://github.com/md-5/SpecialSource"><code>specialsource-maven-plugin</code></a>
+          to remap NMS class, field and method names.
+        </p>
+        <p>
+          However, if you're using reflections and you're referencing a NMS field (or method) by its obfuscated name
+          (i.e. <code>NMSClass.getDeclaredField("c")</code>), then you shouldn't use the plugin, since your code is
+          depending on a <strong>specific</strong> version of the mappings and not on the one found at compile time.
+        </p>
+      </answer>
+    </faq>
+    <faq id="When shouldn't I use the Mappings Version Resolver plugin">
+      <question>When shouldn't I use the Mappings Version Resolver plugin?</question>
+      <answer>
+        <p>
+          It is NOT suggested to use the Mappings Version Resolver plugin when you're using reflections and you're
+          referencing a NMS field (or method) by its obfuscated name (i.e. <code>NMSClass.getDeclaredField("c")</code>),
+          since your code is depending on a certain version of the mappings and not on the one found at compile time.
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>
