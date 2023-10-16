@@ -9,7 +9,7 @@
 
     <name>Mappings Version Resolver Maven Plugin</name>
     <description>A maven plugin for resolving the mappings version used by the provided Spigot server (or fork).</description>
-    <url>https://frengor.com/maven-plugins/mappings-version-resolver/</url>
+    <url>https://frengor.com/maven-plugins/MappingsVersionResolver/</url>
     <inceptionYear>2023</inceptionYear>
 
     <developers>

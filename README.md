@@ -5,13 +5,13 @@ Mappings Version Resolver is a maven plugin for resolving the mappings version u
 It can be used to automatically have the correct mappings version inside the compiled plugin without having to manually update
 it for every new minecraft version (or mapping change).
 
-**Plugin documentation:** <https://frengor.com/maven-plugins/mappings-version-resolver/>  
-**Usage with maven:** <https://frengor.com/maven-plugins/mappings-version-resolver/usage.html>  
-**Example of automation with `templating-maven-plugin`:** <https://frengor.com/maven-plugins/mappings-version-resolver/examples/example-templating.html>  
+**Plugin documentation:** <https://frengor.com/maven-plugins/MappingsVersionResolver/>  
+**Usage with maven:** <https://frengor.com/maven-plugins/MappingsVersionResolver/usage.html>  
+**Example of automation with `templating-maven-plugin`:** <https://frengor.com/maven-plugins/MappingsVersionResolver/examples/example-templating.html>  
 
 ## Maven instructions
 
-> Copied from [Usage](https://frengor.com/maven-plugins/mappings-version-resolver/usage.html)
+> Copied from [Usage](https://frengor.com/maven-plugins/MappingsVersionResolver/usage.html)
 
 The plugin is published on the `fren_gor` repo:
 
