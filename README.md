@@ -1,3 +1,6 @@
+[![Build Status](https://jenkins.frengor.com/job/MappingsVersionResolver/badge/icon)](https://jenkins.frengor.com/job/MappingsVersionResolver/)
+[![License](https://img.shields.io/badge/license-Apache--2.0-orange)](LICENSE)
+
 # Mappings Version Resolver
 
 Mappings Version Resolver is a maven plugin for resolving the mappings version used by the provided Spigot server (or fork).
