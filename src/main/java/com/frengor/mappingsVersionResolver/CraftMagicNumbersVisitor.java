@@ -20,7 +20,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
 /**
- * Utility to read the mappings version from the {@code CraftMagicNumbers.getMappingsVersion()} method.
+ * Utility to read the mappings version from the {@code CraftMagicNumbers#getMappingsVersion()} method.
  */
 public class CraftMagicNumbersVisitor extends ClassVisitor {
 

@@ -78,10 +78,10 @@ public class MappingVersion {
 
 * Checking the mappings version
 
-  You can now compare <<<RESOLVED_MAPPINGS_VERSION>>> with <<<CraftMagicNumbers.getMappingsVersion()>>>:
+  You can now compare <<<RESOLVED_MAPPINGS_VERSION>>> with <<<CraftMagicNumbers.INSTANCE.getMappingsVersion()>>>:
 
 +----------+
-if (!CraftMagicNumbers.getMappingsVersion().equals(MappingVersion.RESOLVED_MAPPINGS_VERSION)) {
+if (!CraftMagicNumbers.INSTANCE.getMappingsVersion().equals(MappingVersion.RESOLVED_MAPPINGS_VERSION)) {
   throw new RuntimeException("Wrong mappings version found!");
 }
 +----------+
