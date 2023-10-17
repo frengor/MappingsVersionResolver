@@ -19,6 +19,9 @@ package com.frengor.mappingsVersionResolver;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
+/**
+ * Utility to read the mappings version from the {@code CraftMagicNumbers.getMappingsVersion()} method.
+ */
 public class CraftMagicNumbersVisitor extends ClassVisitor {
 
     private boolean methodFound;
@@ -67,6 +70,11 @@ public class CraftMagicNumbersVisitor extends ClassVisitor {
         }
     }
 
+    /**
+     * Gets the resolved version, or {@code null} if either not found or the visitor hasn't run yet.
+     *
+     * @return The resolved version, or {@code null} if either not found or the visitor hasn't run yet.
+     */
     public String getVersion() {
         return version;
     }
