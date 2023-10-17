@@ -35,7 +35,7 @@ The resolved version is put into the property specified into the `outputProperty
     <plugin>
         <groupId>com.frengor</groupId>
         <artifactId>mappings-version-resolver-maven-plugin</artifactId>
-        <version>1.0</version>
+        <version>1.0.0</version>
         <executions>
             <execution>
                 <goals>
